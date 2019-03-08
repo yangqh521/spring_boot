@@ -1,13 +1,20 @@
+# YAML https://www.jianshu.com/p/97222440cd08
+
 server:
   port: 8888
+  context-path: /
+ 
+---
 
 spring:
-    datasource:
-        url: jdbc:mysql://localhost:3306/dsp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
-        username: root
-        password: 123456
-        driver-class-name: com.mysql.jdbc.Driver
-        
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.yqh.boot.entity
+  datasource:
+    dsp:
+      jdbc-url: jdbc:mysql://localhost:3306/dsp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    site:
+      jdbc-url: jdbc:mysql://localhost:3306/site?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver

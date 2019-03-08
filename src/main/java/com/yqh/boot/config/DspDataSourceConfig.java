@@ -30,7 +30,7 @@ public class DspDataSourceConfig {
 	// 表示这个数据源是默认数据源
 	@Primary
 	// 读取application.properties中的配置参数映射成为一个对象，prefix表示参数的前缀
-	@ConfigurationProperties(prefix="jdbc.dsp")
+	@ConfigurationProperties(prefix="spring.datasource.dsp")
 	public DataSource dspDataSource() {
 		return DataSourceBuilder.create().build();
 	}

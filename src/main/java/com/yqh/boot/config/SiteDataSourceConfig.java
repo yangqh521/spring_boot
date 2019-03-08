@@ -19,7 +19,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class SiteDataSourceConfig {
 	
 	@Bean(name = "siteDataSource")	
-	@ConfigurationProperties(prefix="jdbc.site") //告诉自动加载配置的属性
+	@ConfigurationProperties(prefix="spring.datasource.site") //告诉自动加载配置的属性
 	public DataSource siteDataSource() {
 		return DataSourceBuilder.create().build();
 	}
