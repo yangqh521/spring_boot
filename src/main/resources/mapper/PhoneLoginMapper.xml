@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yqh.boot.dao.site.PhoneLoginMapper">
+  <resultMap id="BaseResultMap" type="com.yqh.boot.entity.PhoneLogin">
+    <id column="phone_login_id" jdbcType="INTEGER" property="phoneLoginId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mapping_user_id" jdbcType="INTEGER" property="mappingUserId" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    phone_login_id, phone, mapping_user_id, is_delete, create_time, last_modify_time
+  </sql>
+  
+  <select id="selectPhoneLoginByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT phone_login_id, phone, mapping_user_id, is_delete, create_time
+    FROM phone_login WHERE phone_login_id = #{phoneLoginId}
+  </select>
+  
+  <insert id="insertPhoneLogin" parameterType="com.yqh.boot.entity.PhoneLogin" useGeneratedKeys="true" keyProperty="phoneLoginId">
+    INSERT INTO phone_login (phone, mapping_user_id, create_time)
+    VALUES (#{phone}, #{mappingUserId}, #{createTime})
+  </insert>
+  
+  <select id="getPhoneLogin" parameterType="com.yqh.boot.entity.PhoneLogin" resultMap="BaseResultMap">
+  	SELECT phone_login_id, phone, mapping_user_id, is_delete, create_time
+    FROM phone_login
+    <where>
+    	<if test="phoneLoginId != null">
+    		AND phone_login_id = #{phoneLoginId}
+    	</if>
+    	<if test="phone != null">
+    		AND phone = #{phone}
+    	</if>
+    	<if test="mappingUserId != null">
+    		AND mapping_user_id = #{mappingUserId}
+    	</if>
+    	<if test="isDelete != null">
+    		AND is_delete = #{isDelete}
+    	</if>
+    	LIMIT 1
+    </where>
+  </select>
+  
+</mapper>

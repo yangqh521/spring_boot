@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yqh.boot.dao.dsp.AdverInfoMapper">
+  <resultMap id="AdverInfoResultMap" type="com.yqh.boot.entity.AdverInfo">
+    <id column="adver_id" jdbcType="INTEGER" property="adverId" />
+    <result column="adver_name" jdbcType="VARCHAR" property="adverName" />
+    <result column="region_id" jdbcType="INTEGER" property="regionId" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agent_name" jdbcType="VARCHAR" property="agentName" />
+    <result column="operate_name" jdbcType="VARCHAR" property="operateName" />
+    <result column="cat_id" jdbcType="INTEGER" property="catId" />
+    <result column="sub_cat_id" jdbcType="INTEGER" property="subCatId" />
+    <result column="site_name" jdbcType="VARCHAR" property="siteName" />
+    <result column="site_url" jdbcType="VARCHAR" property="siteUrl" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="budget" jdbcType="INTEGER" property="budget" />
+    <result column="balance" jdbcType="INTEGER" property="balance" />
+    <result column="cost" jdbcType="INTEGER" property="cost" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="icp_type_id" jdbcType="TINYINT" property="icpTypeId" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    adver_id, adver_name, region_id, region_name, agent_id, agent_name, operate_name, 
+    cat_id, sub_cat_id, site_name, site_url, user_id, budget, balance, cost, status, 
+    icp_type_id, is_delete, create_time, last_modify_time
+  </sql>
+  
+  <select id="getAdverInfoList" resultMap="AdverInfoResultMap" parameterType="java.util.Map">
+  	SELECT
+  		<include refid="Base_Column_List"/>
+  	FROM adver_info
+  	<where>
+  		<if test="adverNameLike != null">
+  			AND adver_name LIKE CONCAT('%', #{adverNameLike}, '%')
+  		</if>
+  	</where>
+  	
+  </select>
+  
+</mapper>
