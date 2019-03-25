@@ -28,10 +28,12 @@ public class RedisLockAdvice {
         Method method = targetClazz.getMethod(methodName, parameterTypes);
         RedisLock redisLockAnnoation = method.getDeclaredAnnotation(RedisLock.class);
         
-        String key = RedisLockConfig.KEY_PREFIX + redisLockAnnoation.value();
+        String key = RedisLockConfig.KEY_PREFIX + redisLockAnnoation.value().getLockKey();
         System.out.println("[ RedisLockAdvice ] methodName:" + methodName);
-        System.out.println("[ RedisLockAdvice ] key:" + key);
-        System.out.println("[ RedisLockAdvice redisLockAnnoation ] json:" + JSONObject.toJSONString(redisLockAnnoation));
+        System.out.println("[ RedisLockAdvice redisLockAnnoation key ]:" + key);
+        System.out.println("[ RedisLockAdvice redisLockAnnoation isBlock ]:" + redisLockAnnoation.isBlock());
+        System.out.println("[ RedisLockAdvice redisLockAnnoation waitTime ]:" + redisLockAnnoation.waitTime());
+        System.out.println("[ RedisLockAdvice redisLockAnnoation expireTime ]:" + redisLockAnnoation.expireTime());
         
         if(redisLockAnnoation.isBlock()){
         	try {
@@ -41,13 +43,13 @@ public class RedisLockAdvice {
 						System.out.println("[ RedisLockAdvice ] throw RedisLockBlockException !");
 						throw new RedisLockBlockException("[ " + methodName + " lock ] block !");
 					}
+					Thread.sleep(100);	// 100ms重试一次
 				}
 				System.out.println("[ RedisLockAdvice isBlock ] lock success !");
 				return proceedingJoinPoint.proceed();
-			} catch (Exception e) {
+			} catch (Exception exception) {
 				System.out.println("[ RedisLockAdvice isBlock ] lock fail !");
-				e.printStackTrace();
-				throw e;
+				throw exception;
 			} finally {
 				System.out.println("[ RedisLockAdvice isBlock ] lock unlock !");
 				redisDistributedLock.unlock(key);
@@ -60,10 +62,9 @@ public class RedisLockAdvice {
 				}
 				System.out.println("[ RedisLockAdvice notBlock] lock success !");
 				return proceedingJoinPoint.proceed();
-			} catch (Exception e) {
+			} catch (Exception exception) {
 				System.out.println("[ RedisLockAdvice notBlock ] lock fail !");
-				e.printStackTrace();
-				throw e;
+				throw exception;
 			} finally {
 				System.out.println("[ RedisLockAdvice notBlock ] lock unlock !");
 				redisDistributedLock.unlock(key);

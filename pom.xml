@@ -73,12 +73,40 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.9.1</version>
+		</dependency>
 		<!-- alibaba fastjson 格式化对 -->  
         <dependency>  
             <groupId>com.alibaba</groupId>  
             <artifactId>fastjson</artifactId>  
-            <version>1.1.41</version>  
-        </dependency> 
+            <version>1.2.15</version>  
+        </dependency>
+        <dependency>
+	        <groupId>org.redisson</groupId>
+	        <artifactId>redisson</artifactId>
+	        <version>3.3.2</version>
+ 		</dependency> 
 	</dependencies>
 
 	<build>
