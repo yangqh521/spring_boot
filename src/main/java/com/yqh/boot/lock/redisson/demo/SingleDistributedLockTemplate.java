@@ -4,7 +4,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SingleDistributedLockTemplate implements DistributedLockTemplate {
 	
 	long DEFAULT_WAIT_TIME = 30;

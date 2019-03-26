@@ -11,6 +11,7 @@ public enum RedisLockKeyType {
 	TEST("test"),
 	TEST_1("123"),
 	TEST_2("abc"),
+	REDISSON("redisson"),
 	CASH_SEND("cash_send");
 	
 	private String lockKey;

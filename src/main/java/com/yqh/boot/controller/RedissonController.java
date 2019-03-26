@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yqh.boot.common.AppResponse;
+import com.yqh.boot.service.LockService;
 
 @RestController
 @RequestMapping("/redisson")
 public class RedissonController {
 	
 	private static final String LOCK_FLAG = "redissonlock_";
+	
+	@Autowired
+	LockService lockService;
+	
 	
 	@Autowired
 	RedissonClient redissonClient;
@@ -79,6 +84,24 @@ public class RedissonController {
         }
     }
 
+    
+    @RequestMapping("/test3")
+	public AppResponse test3(String logid, Integer seconds){
+		AppResponse resp = new AppResponse();
+		long time = System.currentTimeMillis();
+		String logTitle = "[ test3_" + logid + "_" + time +" ] >>> ";
+		System.out.println( logTitle + "start ~~~");
+		try {
+			System.out.println(logTitle + "sleep ing ...");
+			lockService.lockTest3(time, logid, seconds);
+			System.out.println(logTitle + "sleep over ...");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(logTitle + "end ~~~");
+		resp.setData(logTitle);
+		return resp;
+	}
 	
 	
 }
