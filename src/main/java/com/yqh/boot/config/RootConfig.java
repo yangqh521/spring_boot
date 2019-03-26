@@ -4,28 +4,40 @@ import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class RootConfig {
+	
+	@Value("${spring.redis.database}")
+    private Integer database;
+	
+	@Value("${spring.redis.host}")
+	private String host;
+	
+	@Value("${spring.redis.port}")
+	private Integer port;
+	
+	@Value("${spring.redis.password}")
+	private String password;
+	
+	@Value("${spring.redis.timeout}")
+	private Integer timeout;
 
 	/**
 	 * redisson
 	 * @return
 	 */
-//	@Bean(destroyMethod="shutdown")
-//  public RedissonClient redissonClient() throws IOException {
-//      RedissonClient redissonClient = Redisson.create(
-//              Config.fromYAML(new ClassPathResource("redisson.yml").getInputStream()));
-//      return redissonClient;
-//  }
 	@Bean
     RedissonClient redissonClient() {
         Config config = new Config();
         SingleServerConfig serverConfig = config.useSingleServer()
-                .setAddress("123.56.176.83:6379")
-                .setDatabase(13)
-                .setTimeout(1500);
-        serverConfig.setPassword("gx8bzOwHtioVhIkI");
+                .setAddress(host+ ":" + port)
+                .setDatabase(database)
+                .setTimeout(timeout);
+        serverConfig.setPassword(password);
         return Redisson.create(config);
     }
 	
