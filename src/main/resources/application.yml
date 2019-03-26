@@ -6,6 +6,11 @@ server:
  
 ---
 
+logging:
+  config: classpath:logback.xml
+
+---
+
 spring:
   datasource:
     dsp:
