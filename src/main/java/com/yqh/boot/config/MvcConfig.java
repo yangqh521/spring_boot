@@ -13,9 +13,18 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
+/**
+ * 模拟mvc使用
+ * @author Yang.Qinghui
+ *
+ */
 @Configuration
-public class FastJsonConfiguration {
-
+public class MvcConfig {
+	
+	/**
+	 * 使用FastJson
+	 * @return
+	 */
 	@Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         // 1.定义一个converters转换消息的对象
@@ -34,4 +43,6 @@ public class FastJsonConfiguration {
         // 5.返回HttpMessageConverters对象
         return new HttpMessageConverters(converter);
     }
+
+	
 }

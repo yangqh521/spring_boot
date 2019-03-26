@@ -21,12 +21,12 @@ public class TestAdvice {
 	public void pointcut(){};
     
     @Before("execution(* com.yqh.boot..*(..))")
-    public void before() {
+    public void doBefore() {
 		System.out.println("前置通知。。。。。。");
 	}
 	
   	@Around(value="@annotation(redisLock)")
-	public void around(ProceedingJoinPoint proceedingJoinPoint, RedisLock redisLock) throws Throwable{
+	public void doAround(ProceedingJoinPoint proceedingJoinPoint, RedisLock redisLock) throws Throwable{
     	System.out.println("环绕前通知。。。。。。");
     	System.out.println("redisLock value >>> " + redisLock.value().getLockKey());
     	proceedingJoinPoint.proceed();
@@ -34,7 +34,7 @@ public class TestAdvice {
     }
     
 	@After("@annotation(com.yqh.boot.lock.RedisLock)")
-	public void after() {
+	public void doAfter() {
 		System.out.println("后置通知....");
 		
 	}

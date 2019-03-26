@@ -14,6 +14,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+/**
+ * 整合mybatis site数据源
+ * @author Yang.Qinghui
+ *
+ */
 @Configuration
 @MapperScan(basePackages="com.yqh.boot.dao.site",sqlSessionFactoryRef="siteDataSqlSessionFactory")
 public class SiteDataSourceConfig {

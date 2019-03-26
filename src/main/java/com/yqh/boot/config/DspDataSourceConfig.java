@@ -17,6 +17,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 /**
  * https://blog.csdn.net/tuesdayma/article/details/81081666
+ * 整合mybatis site数据源
  * @author Yang.Qinghui
  *
  */

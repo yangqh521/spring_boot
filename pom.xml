@@ -107,6 +107,12 @@
 	        <artifactId>redisson</artifactId>
 	        <version>3.3.2</version>
  		</dependency> 
+ 		<dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0</version>
+        </dependency>
+        
 	</dependencies>
 
 	<build>

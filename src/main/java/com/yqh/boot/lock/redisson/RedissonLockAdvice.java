@@ -20,7 +20,7 @@ public class RedissonLockAdvice {
 	RedissonClient redissonClient;
 	
 	@Around("@annotation(redissonLock)")
-	public Object processAround(ProceedingJoinPoint proceedingJoinPoint, RedissonLock redissonLock) throws Throwable {
+	public Object doAround(ProceedingJoinPoint proceedingJoinPoint, RedissonLock redissonLock) throws Throwable {
 		
 		RLock fairLock = redissonClient.getFairLock("redisson_lock_test");
 		System.out.println("[RedissonLockAdvice processAround] getFairLock ~~~");

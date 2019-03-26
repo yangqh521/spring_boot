@@ -20,7 +20,7 @@ public class RedisLockAdvice {
 	
 	
     @Around("@annotation(com.yqh.boot.lock.RedisLock)")
-	public Object processAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+	public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		
 		String methodName = proceedingJoinPoint.getSignature().getName();
         Class<?> targetClazz = proceedingJoinPoint.getTarget().getClass();
