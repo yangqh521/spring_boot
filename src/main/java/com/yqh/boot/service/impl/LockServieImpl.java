@@ -27,7 +27,7 @@ public class LockServieImpl implements LockService{
 	
 	@Override
 	@RedissonLock(value=RedisLockKeyType.REDISSON, waitTime=5*1000, leaseTime=15*1000)
-	public void lockTest3(long time, String logid, Integer seconds)
+	public String lockTest3(long time, String logid, Integer seconds)
 			throws Exception {
 		System.out.println("--->>> service lockTest3 begin <<<---");
 		Thread.sleep(seconds * 1000);
@@ -37,6 +37,8 @@ public class LockServieImpl implements LockService{
 		System.out.println("NOTICE: insert redisson data >>> " +  string);
 		Thread.sleep(1000);
 		System.out.println("--->>> service lockTest3 end <<<---");
+		
+		return string;
 	}
 
 }

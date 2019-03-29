@@ -55,7 +55,8 @@ public class LockAction {
 		System.out.println("[ " + time +" lockTest2 " + logid + " ] start ~~~");
 		try {
 			System.out.println("[ " + time +" lockTest2 " + logid + " ] sleep ing ...");
-			lockService.lockTest2(time, logid, seconds);
+			String result = lockService.lockTest3(time, logid, seconds);
+			System.out.println("[ " + time +" lockTest2 " + logid + " ] result: " + result);
 			System.out.println("[ " + time +" lockTest2 " + logid + " ] sleep over ...");
 		} catch (Exception e) {
 			e.printStackTrace();
