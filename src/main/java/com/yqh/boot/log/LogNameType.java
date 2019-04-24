@@ -1,22 +1,15 @@
 package com.yqh.boot.log;
 
+import lombok.Getter;
 
+@Getter
 public enum LogNameType {
 	
-	CONSOLE("console"),
-	CASH_SEND("cashRedPackageSend");
-	
+	CONSOLE("console");
+
 	private String logName;
 	
 	LogNameType(String logName) {
-		this.logName = logName;
-	}
-
-	public String getLogName() {
-		return logName;
-	}
-
-	public void setLogName(String logName) {
 		this.logName = logName;
 	}
 	
