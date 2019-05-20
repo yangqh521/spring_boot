@@ -12,6 +12,7 @@ import com.yqh.boot.log.enu.LogNameType;
 
 
 public class LogWebContext {
+
 	private static final ThreadLocal<Map<String, Object>> cache = new ThreadLocal<Map<String, Object>>() {
 		@Override
 		protected Map<String, Object> initialValue() {
@@ -37,7 +38,7 @@ public class LogWebContext {
 
 	@SuppressWarnings("unchecked")
 	public Map<String,Object> getLogMap(){
-		Object object = getMap().get(LogKeyType.LOG_MAP.getLogKey());
+		Object object = getMap().get(LogKeyType.LOG_MAP.name());
 		if(object != null)	{
 			return (Map<String,Object>)object;
 		}
@@ -46,13 +47,17 @@ public class LogWebContext {
 
 	public Object getLog(String key){
 		Map<String, Object> logMap = this.getLogMap();
-		if(logMap == null)	return null;
-		if(logMap.get(key) != null)	return logMap.get(key);
+		if(logMap == null)	{
+			return null;
+		}
+		if(logMap.get(key) != null)	{
+			return logMap.get(key);
+		}
 		return null;
 	}
 
 	public void setLogName(LogNameType LogNameType){
-		getMap().put(LogKeyType.LOG_NAME.getLogKey(), LogNameType.getLogName());
+		getMap().put(LogKeyType.LOG_NAME.name(), LogNameType.getLogName());
 	}
 
 	public void setIsSuccess(IsSuccessType isSuccess){
@@ -62,15 +67,17 @@ public class LogWebContext {
 	public void putLog(String key, Object value){
 		Map<String, Object> logMap = getLogMap();
 		logMap.put(key, value);
-		getMap().put(LogKeyType.LOG_MAP.getLogKey(), logMap);
+		getMap().put(LogKeyType.LOG_MAP.name(), logMap);
 	}
 
 	public void printLog(){
 		Map<String, Object> map = getMap();
-		if(map.get(LogKeyType.LOG_NAME.getLogKey()) == null) {
+		if(map.get(LogKeyType.LOG_NAME.name()) == null) {
+			Logger logger = Logger.getLogger(LogWebContext.class);
+			logger.info(JSONObject.toJSONString(map));
 			return;
 		}
-		String logName = (String) map.get(LogKeyType.LOG_NAME.getLogKey());
+		String logName = (String) map.get(LogKeyType.LOG_NAME.name());
 		if(LogNameType.CONSOLE.getLogName().equals(logName)){
 			Logger logger = Logger.getLogger(LogWebContext.class);
 			logger.info(JSONObject.toJSONString(map));

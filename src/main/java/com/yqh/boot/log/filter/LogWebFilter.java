@@ -38,14 +38,14 @@ public class LogWebFilter implements Filter {
 		long startTime = System.currentTimeMillis();
 
 		LogWebContext logWebContext = LogWebContext.getInstance();
-		logWebContext.getMap().put(LogKeyType.URI.getLogKey(), requestURI);
-		logWebContext.getMap().put(LogKeyType.PAMRAMS.getLogKey(), JSONObject.toJSONString(parameterMap));
+		logWebContext.getMap().put(LogKeyType.URI.name(), requestURI);
+		logWebContext.getMap().put(LogKeyType.PAMRAMS.name(), JSONObject.toJSONString(parameterMap));
 
 		// 向下执行
 		filterChain.doFilter(servletRequest, servletResponse);
 
 		String costTime = (System.currentTimeMillis() - startTime) + "ms";
-		logWebContext.getMap().put(LogKeyType.COST_TIME.getLogKey(), costTime);
+		logWebContext.getMap().put(LogKeyType.COST_TIME.name(), costTime);
 		logWebContext.printLog();
 		logWebContext.clear();
 		log.info("[ "+ requestURI +" ] params:" + JSONObject.toJSONString(parameterMap) + ", cost:" + costTime);
