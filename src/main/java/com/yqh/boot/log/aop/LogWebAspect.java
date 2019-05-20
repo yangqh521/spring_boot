@@ -32,9 +32,9 @@ public class LogWebAspect {
 		String requestURI = request.getRequestURI();
 		
 		LogWebContext logWebContext = LogWebContext.getInstance();
-		logWebContext.putLog(LogKeyType.START_TIME.getLogKey(), new Date().getTime() + "");
-		logWebContext.putLog(LogKeyType.URI.getLogKey(), requestURI);
-		logWebContext.putLog(LogKeyType.PAMRAMS.getLogKey(), JSONObject.toJSONString(parameterMap));
+		logWebContext.putLog(LogKeyType.START_TIME.name(), new Date().getTime() + "");
+		logWebContext.putLog(LogKeyType.URI.name(), requestURI);
+		logWebContext.putLog(LogKeyType.PAMRAMS.name(), JSONObject.toJSONString(parameterMap));
 		
 		System.out.println("[ " + requestURI +" ] params:" + JSONObject.toJSONString(parameterMap));
 	}
@@ -42,10 +42,10 @@ public class LogWebAspect {
 	@After("pointcut()")
 	public void doAfter(){
 		LogWebContext logWebContext = LogWebContext.getInstance();
-		Long startTime = Long.valueOf(logWebContext.getLog(LogKeyType.START_TIME.getLogKey()));
-		String requestURI = logWebContext.getLog(LogKeyType.URI.getLogKey());
+		Long startTime = Long.valueOf(logWebContext.getLog(LogKeyType.START_TIME.name()));
+		String requestURI = logWebContext.getLog(LogKeyType.URI.name());
 		String costTime = (System.currentTimeMillis() - startTime) + "ms";
-		logWebContext.putLog(LogKeyType.COST_TIME.getLogKey(), costTime);
+		logWebContext.putLog(LogKeyType.COST_TIME.name(), costTime);
 		
 		logWebContext.printLog();
 		

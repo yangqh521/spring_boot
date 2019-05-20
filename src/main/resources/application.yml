@@ -8,6 +8,8 @@ server:
 
 logging:
   config: classpath:logback.xml
+  level:
+    com.yqh.boot.dao: debug
 
 ---
 

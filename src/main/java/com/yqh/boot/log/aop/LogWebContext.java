@@ -37,7 +37,7 @@ public class LogWebContext {
     }
     
     public void setLogName(LogNameType LogNameType){
-    	cache.get().put(LogKeyType.LOG_NAME.getLogKey(), LogNameType.getLogName());
+    	cache.get().put(LogKeyType.LOG_NAME.name(), LogNameType.getLogName());
     }
     
     public void putLog(String key, String value){
@@ -46,10 +46,10 @@ public class LogWebContext {
     
     public void printLog(){
     	Map<String, String> map = cache.get();
-    	String logName = map.get(LogKeyType.LOG_NAME.getLogKey());
+    	String logName = map.get(LogKeyType.LOG_NAME.name());
     	cache.remove();
-    	map.put(LogKeyType.LOG_NAME.getLogKey(), null);
-    	map.put(LogKeyType.START_TIME.getLogKey(), null);
+    	map.put(LogKeyType.LOG_NAME.name(), null);
+    	map.put(LogKeyType.START_TIME.name(), null);
     	if(logName == null){
     		return;
     	}
