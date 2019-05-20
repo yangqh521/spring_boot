@@ -32,7 +32,7 @@ public class RedissonController {
 		AppResponse resp = new AppResponse();
 		System.out.println("[ RedissonController lock ] redissonClient:" + redissonClient);
 		Map<String,String> map = redissonClient.getMap("testMap");
-		String timeSteap = new Date().getTime() + "";
+		String timeSteap = System.currentTimeMillis() + "";
 		System.out.println("timeSteap >>> " + timeSteap);
 		map.put(timeSteap, timeSteap);
 		resp.setData(timeSteap);
