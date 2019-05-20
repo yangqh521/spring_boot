@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yqh.boot.log.LogKeyType;
+import com.yqh.boot.log.enu.LogKeyType;
 
 /**
  * 测试日志前后打印

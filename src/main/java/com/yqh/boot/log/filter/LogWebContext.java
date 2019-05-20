@@ -2,13 +2,13 @@ package com.yqh.boot.log.filter;
 
 import java.util.Map;
 
-import com.yqh.boot.log.IsSuccessType;
+import com.yqh.boot.log.enu.IsSuccessType;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.yqh.boot.log.LogKeyType;
-import com.yqh.boot.log.LogNameType;
+import com.yqh.boot.log.enu.LogKeyType;
+import com.yqh.boot.log.enu.LogNameType;
 
 
 public class LogWebContext {

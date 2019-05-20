@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
-import com.yqh.boot.log.LogKeyType;
+import com.yqh.boot.log.enu.LogKeyType;
 
 @Slf4j
 @Order(1)

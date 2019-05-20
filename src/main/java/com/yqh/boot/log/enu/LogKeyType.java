@@ -1,4 +1,4 @@
-package com.yqh.boot.log;
+package com.yqh.boot.log.enu;
 
 import lombok.Getter;
 

@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yqh.boot.common.AppResponse;
-import com.yqh.boot.log.LogNameType;
+import com.yqh.boot.log.enu.LogNameType;
 import com.yqh.boot.log.filter.LogWebContext;
 
 @RestController
