@@ -1,7 +1,7 @@
 # YAML https://www.jianshu.com/p/97222440cd08
 
 server:
-  port: 8888
+  port: 8080
   context-path: /
  
 ---
@@ -10,6 +10,14 @@ logging:
   config: classpath:logback.xml
   level:
     com.yqh.boot.dao: debug
+
+---
+
+spring:
+  thymeleaf:
+    suffix: .html
+    cache: false
+    mode: LEGACYHTML5
 
 ---
 
