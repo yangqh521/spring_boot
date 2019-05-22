@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 public class MD5Util {
 
-    private static final String SALT = "yangqh521@qq.com";
+    private static final String SALT = "yangqh521";
 
     public static String encode(String password) {
         password = password + SALT;
