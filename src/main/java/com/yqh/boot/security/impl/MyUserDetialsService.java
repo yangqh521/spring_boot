@@ -1,6 +1,7 @@
 package com.yqh.boot.security.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yqh.boot.security.dao.SysRoleDao;
 import com.yqh.boot.security.dao.SysUserDao;
 import com.yqh.boot.security.entity.SysPermission;
 import com.yqh.boot.security.entity.SysRole;
@@ -18,12 +19,20 @@ import org.springframework.security.core.userdetails.User;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 根据username获取本地用户信息以及权限
+ *  不做权限校验的话?
+ */
 @Slf4j
 @Service
 public class MyUserDetialsService implements UserDetailsService {
 
     @Autowired
     SysUserDao sysUserDao;
+
+    @Autowired
+    SysRoleDao sysRoleDao;
 
     @Override
     public UserDetails loadUserByUsername(String userName) {
@@ -43,12 +52,14 @@ public class MyUserDetialsService implements UserDetailsService {
 
         // 获取用户的角色集合
         List<SysRole> roleList = user.getRoleList();
+
         //遍历角色集合，并获取每个角色拥有的权限
         for (SysRole role : roleList) {
             List<SysPermission> permissionList = role.getPermissionList();
+
             for (SysPermission permission :permissionList) {
                 // 为每个授权中心对象写入权限名
-                grantedAuthoritieList.add(new SimpleGrantedAuthority(permission.getPermissionName()));
+                grantedAuthoritieList.add(new SimpleGrantedAuthority(permission.getPermissionId()));
             }
         }
 

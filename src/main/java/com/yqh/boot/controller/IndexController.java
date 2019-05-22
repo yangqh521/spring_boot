@@ -33,29 +33,5 @@ public class IndexController {
         return "login";
     }
 
-    // 默认走login页面
-    @RequestMapping("/loginUser")
-    public String login(HttpServletRequest request, HttpServletResponse response,
-                        String username, String password) {
-
-//        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-//
-//        try{
-//            //使用SpringSecurity拦截登陆请求 进行认证和授权
-//            Authentication authenticate = myAuthenticationManager.authenticate(usernamePasswordAuthenticationToken);
-//
-//            SecurityContextHolder.getContext().setAuthentication(authenticate);
-//            //使用redis session共享
-//            HttpSession session = request.getSession();
-//            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext()); // 这个非常重要，否则验证后将无法登陆
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return "redirect:login-error?error=2";
-//        }
-
-
-        return "redirect:index";
-
-    }
 
 }

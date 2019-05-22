@@ -23,23 +23,46 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyUserDetialsService userDetialsService;
 
-    //配置加密
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetialsService).passwordEncoder(new PasswordEncoder() {
-            //加密
-            @Override
-            public String encode(CharSequence rawPassword) {
-                return MD5Util.encode((String) rawPassword);
-            }
 
-            //解密,前者是输入的密码,后者是数据库查询的密码
-            @Override
-            public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return encodedPassword.equals(MD5Util.encode((String) rawPassword));
-            }
-        });
+    /**
+     * 密码加密
+     *
+     * BCryptPasswordEncoder相关知识：
+     * 用户表的密码通常使用MD5等不可逆算法加密后存储，为防止彩虹表破解更会先使用一个特定的字符串（如域名）加密，然后再使用一个随机的salt（盐值）加密。
+     * 特定字符串是程序代码中固定的，salt是每个密码单独随机，一般给用户表加一个字段单独存储，比较麻烦。
+     * BCrypt算法将salt随机并混入最终加密后的密码，验证时也无需单独提供之前的salt，从而无需单独处理salt问题。
+     */
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
+
+    /**
+     * 添加 UserDetailsService，实现自定义登录校验
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder builder) throws Exception{
+        builder.userDetailsService(userDetialsService)
+                .passwordEncoder(passwordEncoder());
+    }
+
+    //配置加密
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetialsService).passwordEncoder(new PasswordEncoder() {
+//            //加密
+//            @Override
+//            public String encode(CharSequence rawPassword) {
+//                return MD5Util.encode((String) rawPassword);
+//            }
+//
+//            //解密,前者是输入的密码,后者是数据库查询的密码
+//            @Override
+//            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+//                return encodedPassword.equals(MD5Util.encode((String) rawPassword));
+//            }
+//        });
+//    }
 
 
     @Override

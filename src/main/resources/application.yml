@@ -1,7 +1,7 @@
 # YAML https://www.jianshu.com/p/97222440cd08
 
 server:
-  port: 8080
+  port: 8888
   context-path: /
  
 ---

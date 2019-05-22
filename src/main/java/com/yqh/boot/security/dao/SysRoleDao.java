@@ -4,6 +4,7 @@ package com.yqh.boot.security.dao;
 import com.yqh.boot.security.entity.SysPermission;
 import com.yqh.boot.security.entity.SysRole;
 import com.yqh.boot.security.entity.SysUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,56 +13,52 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 角色 --> 权限
+ * 角色 <--> 权限
  */
 @Repository
 public class SysRoleDao {
 
-    Map<String, SysRole> roleMap = null;
+    @Autowired
+    SysPermissionDao sysPermissionDao;
+
+
+    private static Map<String, SysRole> roleMap = null;
 
     private void initRoleMap(){
 
-        roleMap = new HashMap<>();
-
-        // 权限
-        SysPermission p1 = new SysPermission();
-        p1.setPermissionName("/security/test1");
-
-        SysPermission p2 = new SysPermission();
-        p2.setPermissionName("/security/test2");
-
-        SysPermission p3 = new SysPermission();
-        p3.setPermissionName("/security/test3");
-
-        SysPermission p4 = new SysPermission();
-        p4.setPermissionName("/security/test4");
-
-        SysPermission p5 = new SysPermission();
-        p5.setPermissionName("/security/test5");
-
-
-        // 角色
-        SysRole role_admin = new SysRole();
-        role_admin.setRoleName("ROLE_ADMIN");
-        List<SysPermission> adminPerList = new ArrayList<>();
-        adminPerList.add(p1);
-        adminPerList.add(p2);
-        adminPerList.add(p3);
-        adminPerList.add(p4);
-        role_admin.setPermissionList(adminPerList);
-        roleMap.put(role_admin.getRoleName(),role_admin);
-
-        SysRole role_user = new SysRole();
-        role_user.setRoleName("ROLE_USER");
-        List<SysPermission> userPerList = new ArrayList<>();
-        userPerList.add(p3);
-        userPerList.add(p4);
-        userPerList.add(p5);
-        role_user.setPermissionList(userPerList);
-        roleMap.put(role_user.getRoleName(),role_user);
+        putRoleMap("admin", "ROLE_ADMIN", "ALL", "P1", "P2", "P3", "P4");
+        putRoleMap("user", "ROLE_USER", "ALL", "P3", "P4", "P5");
 
 
     }
+
+    private void putRoleMap(String roleId, String roleName, String... permissionIds){
+
+        if(roleMap == null){
+            roleMap = new HashMap<>();
+        }
+
+        Map<String, SysPermission> permissionMap = sysPermissionDao.getPermissionMap();
+
+        List<SysPermission> permissionList = new ArrayList<>();
+        if(permissionIds != null && permissionIds.length > 0){
+            for(int i= 0; i < permissionIds.length; i++){
+                SysPermission permission = permissionMap.get(permissionIds[i]);
+                if(permission != null){
+                    permissionList.add(permission);
+                }
+            }
+        }
+
+        SysRole sysRole = new SysRole();
+        sysRole.setRoleId(roleId);
+        sysRole.setRoleName(roleName);
+        sysRole.setPermissionList(permissionList);
+        roleMap.put(sysRole.getRoleId(), sysRole);
+
+    }
+
+
 
     public Map<String, SysRole> getRoleMap(){
         if(roleMap == null){

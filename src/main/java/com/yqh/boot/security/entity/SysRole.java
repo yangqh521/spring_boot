@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 public class SysRole {
 
+//    private Long id;
+    private String roleId;
     private String roleName;
     private List<SysPermission> permissionList;
 
