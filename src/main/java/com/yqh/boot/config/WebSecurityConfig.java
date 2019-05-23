@@ -41,8 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 添加 UserDetailsService，实现自定义登录校验
      */
     @Override
-    protected void configure(AuthenticationManagerBuilder builder) throws Exception{
-        builder.userDetailsService(userDetialsService)
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userDetialsService)
                 .passwordEncoder(passwordEncoder());
     }
 
